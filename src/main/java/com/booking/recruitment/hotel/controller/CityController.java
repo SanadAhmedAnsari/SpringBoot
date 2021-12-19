@@ -1,7 +1,9 @@
 package com.booking.recruitment.hotel.controller;
 
 import com.booking.recruitment.hotel.model.City;
+import com.booking.recruitment.hotel.model.Hotel;
 import com.booking.recruitment.hotel.service.CityService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +30,11 @@ public class CityController {
   @ResponseStatus(HttpStatus.CREATED)
   public City createCity(@RequestBody City city) {
     return cityService.createCity(city);
+  }
+
+  @GetMapping("/search/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public List<Object> getTopThreeClosestHotels(@PathVariable Long id) throws JsonProcessingException {
+    return cityService.getTopThreeClosestHotels(id);
   }
 }

@@ -3,11 +3,15 @@ package com.booking.recruitment.hotel.service.impl;
 import com.booking.recruitment.hotel.exception.BadRequestException;
 import com.booking.recruitment.hotel.exception.ElementNotFoundException;
 import com.booking.recruitment.hotel.model.City;
+import com.booking.recruitment.hotel.model.Hotel;
 import com.booking.recruitment.hotel.repository.CityRepository;
 import com.booking.recruitment.hotel.service.CityService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,4 +43,17 @@ class DefaultCityService implements CityService {
 
     return cityRepository.save(city);
   }
+
+  @Override
+  public List<Object> getTopThreeClosestHotels(Long id) throws JsonProcessingException {
+    City city = getCityById(id);
+    ObjectMapper objectMapper = new ObjectMapper();
+    if(city != null){
+      List<Object> hotels =  cityRepository.getTopThreeClosestHotels(city.getCityCentreLatitude(), city.getCityCentreLongitude());
+      return hotels;
+    } else{
+      return new ArrayList<>();
+    }
+  }
+
 }
