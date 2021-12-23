@@ -15,6 +15,6 @@ Extend a half implemented Spring boot application
 Application contains data about hotels and cities.
 Need to implement few APIs related to finding nearest hotels to the city center sort by distance and distance property
 should be there in hoteldto to show the distance as well from the entered city 
-endnpoint :- /search/{cityId}?sortBy=distance
+endnpoint :- /search/{cityId}?sortBy=distance respone will be hotelDTO (hotel resource with additional property of distance)
 Distance needs to be calculated with haversine formula
 There were some pre-written test cases, which deliberately written to fail the build, need to fix them and add few more if time permits.
